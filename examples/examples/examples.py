@@ -1,8 +1,7 @@
-"""Welcome to Reflex! This file outlines the steps to create a basic app."""
-
 import reflex as rx
 from alert import alert
 from provider import provider
+from button import button
 from rxconfig import config
 # from iconify import icon
 
@@ -41,7 +40,6 @@ colors = ["default", "primary", "secondary", "success", "warning", "danger"]
 
 
 def index() -> rx.Component:
-    # Welcome Page (Index)
     return rx.container(
         dark_mode_toggle(),
         provider(
@@ -55,9 +53,17 @@ def index() -> rx.Component:
                     )
                 )
                 for color in colors
-            ]
-        ),
-    )
+            ],
+            rx.flex(
+                button("Hello World", color="primary"),
+                button("Hello World", color="secondary"),
+                button("Hello World", color="success"),
+                button("Hello World", color="warning"),
+                button("Hello World", color="danger"),
+                button("Hello World", color="default"),
+                spacing="3",
+            ),
+        ),    )
 
 
 app = rx.App()
