@@ -1,5 +1,6 @@
 import reflex as rx
-from .types import *
+from typing import Literal, Optional
+from .types import SupportedLocales
 
 
 class Provider(rx.Component):
@@ -23,11 +24,3 @@ class Provider(rx.Component):
     # Accessibility
     validation_behavior: Literal["native", "aria"] = "native"
     reduced_motion: Literal["user", "always", "never"] = "user"
-
-
-tailwindplugin: dict = {
-    "name": "@heroui/theme",
-    "import": {"name": "heroui", "from": "@heroui/theme"},
-    "call": "heroui",
-}
-HeroUILinker: str = "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}"

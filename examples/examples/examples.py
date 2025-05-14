@@ -1,69 +1,35 @@
 import reflex as rx
-from alert import alert
-from provider import provider
-from button import button
-from rxconfig import config
-# from iconify import icon
+import heroui as hero
 
 
 class State(rx.State):
     """The app state."""
 
-    ...
+    count: int = 0
 
+    def increment(self):
+        self.count += 1
 
-from reflex.style import set_color_mode, color_mode
-
-
-def dark_mode_toggle() -> rx.Component:
-    return rx.segmented_control.root(
-        rx.segmented_control.item(
-            rx.icon(tag="monitor", size=20),
-            value="system",
-        ),
-        rx.segmented_control.item(
-            rx.icon(tag="sun", size=20),
-            value="light",
-        ),
-        rx.segmented_control.item(
-            rx.icon(tag="moon", size=20),
-            value="dark",
-        ),
-        on_change=set_color_mode,
-        variant="classic",
-        radius="large",
-        value=color_mode,
-    )
-
-
-colors = ["default", "primary", "secondary", "success", "warning", "danger"]
+    def decrement(self):
+        self.count -= 1
 
 
 def index() -> rx.Component:
     return rx.container(
-        dark_mode_toggle(),
-        provider(
-            *[
-                rx.container(
-                    alert(
-                        title=f"This is a {color} alert",
-                        description="This is how description looks like 🤩",
-                        color=color,
-                        is_closable=True,
-                    )
-                )
-                for color in colors
-            ],
-            rx.flex(
-                button("Hello World", color="primary"),
-                button("Hello World", color="secondary"),
-                button("Hello World", color="success"),
-                button("Hello World", color="warning"),
-                button("Hello World", color="danger"),
-                button("Hello World", color="default"),
-                spacing="3",
+        hero.provider(
+            hero.card(
+                hero.input(placeholder="Enter your name"),
+                hero.button("Submit", color="primary", margin="10px"),
+                spacing="4",
+                padding="6px",
+                margin="10px"
             ),
-        ),    )
+            # Figure out why this is not working and below thing throwing rx.foreach error
+            # hero.button("Increment", on_click=State.increment),
+            # rx.text(f"Count: {State.count}"),
+            # hero.button("Decrement", on_click=State.decrement),
+        )
+    )
 
 
 app = rx.App()
