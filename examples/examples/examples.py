@@ -1,90 +1,34 @@
 import reflex as rx
-# from alert import alert
-from provider import provider
-from button import button
-from card import *
-from avatar import avatar
-from textarea import textarea
+import heroui as hero
 
 
 class State(rx.State):
     """The app state."""
 
-    markdown: str = "# Hello, World!"
-    color: str = "primary"
+    count: int = 0
 
-    def change_markdown(self, value: str) -> None:
-        """Change the markdown value."""
-        self.markdown = value
+    def increment(self):
+        self.count += 1
 
-
-from reflex.style import set_color_mode, color_mode
-
-
-def dark_mode_toggle() -> rx.Component:
-    return rx.segmented_control.root(
-        rx.segmented_control.item(
-            rx.icon(tag="monitor", size=20),
-            value="system",
-        ),
-        rx.segmented_control.item(
-            rx.icon(tag="sun", size=20),
-            value="light",
-        ),
-        rx.segmented_control.item(
-            rx.icon(tag="moon", size=20),
-            value="dark",
-        ),
-        on_change=set_color_mode,
-        variant="classic",
-        radius="large",
-        value=color_mode,
-    )
-
-
-# colors = ["default", "primary", "secondary", "success", "warning", "danger"]
+    def decrement(self):
+        self.count -= 1
 
 
 def index() -> rx.Component:
     return rx.container(
-        provider(
-            rx.spacer(),
-            avatar(src="https://i.pravatar.cc/150?u=a042581f4e29026024d", size="lg"),
-            textarea(
-                placeholder="Type something...",
-                label="Input",
-                color=State.color,
-                size="lg",
-                variant="bordered",
-                is_disabled=False,
-                is_readonly=False,
-                is_invalid=False,
-                is_required=True,
-                disable_animation=False,
-                auto_focus=True,
-                full_width=True,
-                padding=10,
-                on_value_change=State.change_markdown,
+        hero.provider(
+            hero.card(
+                hero.input(placeholder="Enter your name"),
+                hero.button("Submit", color="primary", margin="10px"),
+                spacing="4",
+                padding="6px",
+                margin="10px"
             ),
-            rx.container(
-                rx.markdown(
-                    State.markdown,
-                    padding=10,
-                    color=State.color,
-                    size="lg",
-                    variant="bordered",
-                    is_disabled=False,
-                    is_readonly=False,
-                    is_invalid=False,
-                    is_required=True,
-                    disable_animation=False,
-                    auto_focus=True,
-                    full_width=True,
-                ),
-                padding=10,
-            ),
-            dark_mode_toggle(),
-        ),
+            # Figure out why this is not working and below thing throwing rx.foreach error
+            # hero.button("Increment", on_click=State.increment),
+            # rx.text(f"Count: {State.count}"),
+            # hero.button("Decrement", on_click=State.decrement),
+        )
     )
 
 

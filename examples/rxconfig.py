@@ -1,6 +1,12 @@
 import reflex as rx
-from provider import tailwindplugin, HeroUILinker
 
+tailwindplugin: dict = {
+    "name": "@heroui/theme",
+    "import": {"name": "heroui", "from": "@heroui/theme"},
+    "call": "heroui",
+}
+
+HeroUILinker: str = "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}"
 # Installation Process:
 # 1. Import the necessary modules.
 # 2. Define the tailwind plugin and HeroUI linker.
