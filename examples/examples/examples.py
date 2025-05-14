@@ -1,15 +1,21 @@
 import reflex as rx
-from alert import alert
+# from alert import alert
 from provider import provider
 from button import button
-from rxconfig import config
-# from iconify import icon
+from card import *
+from avatar import avatar
+from textarea import textarea
 
 
 class State(rx.State):
     """The app state."""
 
-    ...
+    markdown: str = "# Hello, World!"
+    color: str = "primary"
+
+    def change_markdown(self, value: str) -> None:
+        """Change the markdown value."""
+        self.markdown = value
 
 
 from reflex.style import set_color_mode, color_mode
@@ -36,34 +42,50 @@ def dark_mode_toggle() -> rx.Component:
     )
 
 
-colors = ["default", "primary", "secondary", "success", "warning", "danger"]
+# colors = ["default", "primary", "secondary", "success", "warning", "danger"]
 
 
 def index() -> rx.Component:
     return rx.container(
-        dark_mode_toggle(),
         provider(
-            *[
-                rx.container(
-                    alert(
-                        title=f"This is a {color} alert",
-                        description="This is how description looks like 🤩",
-                        color=color,
-                        is_closable=True,
-                    )
-                )
-                for color in colors
-            ],
-            rx.flex(
-                button("Hello World", color="primary"),
-                button("Hello World", color="secondary"),
-                button("Hello World", color="success"),
-                button("Hello World", color="warning"),
-                button("Hello World", color="danger"),
-                button("Hello World", color="default"),
-                spacing="3",
+            rx.spacer(),
+            avatar(src="https://i.pravatar.cc/150?u=a042581f4e29026024d", size="lg"),
+            textarea(
+                placeholder="Type something...",
+                label="Input",
+                color=State.color,
+                size="lg",
+                variant="bordered",
+                is_disabled=False,
+                is_readonly=False,
+                is_invalid=False,
+                is_required=True,
+                disable_animation=False,
+                auto_focus=True,
+                full_width=True,
+                padding=10,
+                on_value_change=State.change_markdown,
             ),
-        ),    )
+            rx.container(
+                rx.markdown(
+                    State.markdown,
+                    padding=10,
+                    color=State.color,
+                    size="lg",
+                    variant="bordered",
+                    is_disabled=False,
+                    is_readonly=False,
+                    is_invalid=False,
+                    is_required=True,
+                    disable_animation=False,
+                    auto_focus=True,
+                    full_width=True,
+                ),
+                padding=10,
+            ),
+            dark_mode_toggle(),
+        ),
+    )
 
 
 app = rx.App()
