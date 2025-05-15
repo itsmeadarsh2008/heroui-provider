@@ -55,14 +55,14 @@ class Button(rx.Component):
     disable_animation: rx.Var[bool] = False
 
     # Events
-    on_press: rx.EventHandler[lambda x: x]
-    on_press_start: rx.EventHandler[lambda x: x]
-    on_press_end: rx.EventHandler[lambda x: x]
+    on_press: rx.EventHandler[lambda e: [e]]
+    on_press_start: rx.EventHandler[lambda e: [e]]
+    on_press_end: rx.EventHandler[lambda e: [e]]
     on_press_change: rx.EventHandler[lambda is_pressed: [is_pressed]]
-    on_press_up: rx.EventHandler[lambda x: x]
-    on_key_down: rx.EventHandler[lambda x: x]
-    on_key_up: rx.EventHandler[lambda x: x]
-    on_click: rx.EventHandler[lambda x: x]
+    on_press_up: rx.EventHandler[lambda e: [e]]
+    on_key_down: rx.EventHandler[lambda e: [e]]
+    on_key_up: rx.EventHandler[lambda e: [e]]
+    on_click: rx.EventHandler[lambda e: [e]]
 
 
 class ButtonGroup(rx.Component):
