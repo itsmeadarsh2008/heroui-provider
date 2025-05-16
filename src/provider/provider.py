@@ -4,6 +4,21 @@ from .types import SupportedLocales
 
 
 class Provider(rx.Component):
+    """A provider component that manages global HeroUI settings and theme.
+
+    Attributes:
+        library: The library the component belongs to.
+        tag: The tag name for the component.
+        locale: The locale setting for internationalization.
+        label_placement: The default placement for input labels (inside, outside, outside-left).
+        spinner_variant: The default visual style for spinners.
+        disable_animation: Whether to disable animations globally.
+        disable_ripple: Whether to disable ripple effects globally.
+        skip_framer_motion_animations: Whether to skip Framer Motion animations.
+        validation_behavior: The validation behavior to use (native, aria).
+        reduced_motion: How to handle motion reduction for accessibility.
+    """
+
     library = "@heroui/system"
     tag = "HeroUIProvider"
 

@@ -63,9 +63,15 @@ def index() -> rx.Component:
                 hero.card(
                     hero.card_body(
                         rx.text(State.description),
-                    ),
-                    on_press=State.change_body
+                    )
                 ),
+                hero.image(
+                    src="https://app.requestly.io/delay/5000/https://heroui.com/images/hero-card-complete.jpeg",
+                    height=200,
+                    width=300,
+                    is_blurred=True,
+                    is_zoomed=True,
+                )
             ),
         )
     )

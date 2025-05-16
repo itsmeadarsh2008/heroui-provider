@@ -11,6 +11,7 @@ from src.checkbox import *
 from src.input import *
 from src.radio import *
 from src.textarea import *
+from src.image import *
 
 # Import provider related components
 from src.provider import *

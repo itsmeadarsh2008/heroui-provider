@@ -3,14 +3,16 @@
 Thank you for your interest in contributing to HeroUI Provider! This document provides guidelines and instructions to help you contribute effectively.
 
 ## Table of Contents
-- [Development Setup](#development-setup)
-- [Project Structure](#project-structure)
-- [Adding a New Component](#adding-a-new-component)
-- [Testing Your Changes](#testing-your-changes)
-- [Running Utilities](#running-utilities)
-- [Coding Style](#coding-style)
-- [Commit Guidelines](#commit-guidelines)
-- [Pull Request Process](#pull-request-process)
+- [Contributing to HeroUI Provider](#contributing-to-heroui-provider)
+  - [Table of Contents](#table-of-contents)
+  - [Development Setup](#development-setup)
+  - [Project Structure](#project-structure)
+  - [Adding a New Component](#adding-a-new-component)
+  - [Testing Your Changes](#testing-your-changes)
+  - [Running Utilities](#running-utilities)
+  - [Coding Style](#coding-style)
+  - [Commit Guidelines](#commit-guidelines)
+  - [Pull Request Process](#pull-request-process)
 
 ## Development Setup
 
@@ -18,18 +20,14 @@ Thank you for your interest in contributing to HeroUI Provider! This document pr
 2. Clone your fork:
 
    ```bash
-   git clone https://github.com/your-username/heroui-provider.git
+   git clone https://github.com/itsmeadarsh2008/heroui-provider.git
    cd heroui-provider
    ```
-
 3. Install development dependencies:
-
    ```bash
    pip install -e '.[dev]'
    ```
-
 4. Set up the examples environment:
-
    ```bash
    cd examples
    pip install -r requirements.txt
@@ -44,6 +42,12 @@ heroui-provider/
 │   ├── provider/           # Base provider component
 │   ├── button/             # Button component
 │   ├── card/               # Card component
+│   ├── avatar/             # Avatar component
+│   ├── input/              # Input component
+│   ├── textarea/           # Textarea component
+│   ├── checkbox/           # Checkbox component
+│   ├── radio/              # Radio component
+│   ├── alert/              # Alert component
 │   └── ...                 # Other components
 ├── heroui/                 # Public API package
 │   ├── __init__.py         # Exports all components
@@ -51,8 +55,9 @@ heroui-provider/
 ├── examples/               # Example applications
 │   ├── examples/           # Example components
 │   ├── assets/             # Static assets
+│   ├── rxconfig.py         # Reflex configuration file
 │   └── requirements.txt    # Example dependencies
-├── utils/                  # Utility scripts
+├── .github/workflows/      # CI/CD workflows
 ├── pyproject.toml          # Project configuration
 └── README.md               # Project documentation
 ```
@@ -77,31 +82,33 @@ heroui-provider/
 
    ```python
    import reflex as rx
-   from typing import Any, Literal, Optional
+   from typing import Any, Literal, Optional, Union
 
    lib_deps: list = ["@heroui/theme", "@heroui/system", "framer-motion"]
 
    class YourComponent(rx.Component):
-       """Your component description.
+       """A description of your component.
 
        Attributes:
            library: The library the component belongs to.
            lib_dependencies: Dependencies required by the component.
            tag: The tag name for the component.
-           # Add your component attributes here
+           variant: The visual style variant of the component.
+           color: The color scheme of the component.
+           size: The size of the component.
        """
 
        library = "@heroui/your-component"
        lib_dependencies: list = lib_deps
        tag = "YourComponent"
 
-       # Add your component props here
+       # Props
        variant: rx.Var[Literal["option1", "option2"]] = "option1"
-       # ...
-
-       # Add your component events here
-       on_click: rx.EventHandler[lambda x: x]
-       # ...
+       color: rx.Var[Literal["default", "primary", "secondary", "success", "warning", "danger"]] = "default"
+       size: rx.Var[Literal["sm", "md", "lg"]] = "md"
+       
+       # Events
+       on_click: rx.EventHandler[lambda e: [e]]
    ```
 
 4. Update the `__init__.py` file:
@@ -119,30 +126,28 @@ heroui-provider/
    from src.your_component import *
    ```
 
-6. Run the update_pyproject utility to register your component:
-
-   ```bash
-   python utils/update_pyproject.py
-   ```
-
 ## Testing Your Changes
 
 1. Navigate to the examples directory:
-
    ```bash
    cd examples
    ```
 
-2. Import and use your component in `examples/examples.py`:
-
+2. Import and use your component in `examples/examples/examples.py`:
    ```python
-   from heroui import your_component
+   import reflex as rx
+   import heroui as hero
    
    # Add your component to the example app
+   hero.your_component(
+       "Your Component",
+       variant="option1",
+       color="primary",
+       size="md",
+   )
    ```
 
 3. Run the example application:
-
    ```bash
    reflex run
    ```
@@ -151,15 +156,19 @@ heroui-provider/
 
 ## Running Utilities
 
-The project includes utility scripts to help with development:
+The project uses several development tools:
 
-- Update project configuration:
-
+- Format your code with ruff:
   ```bash
-  python utils/update_pyproject.py
+  uvx ruff format
   ```
 
-Run this utility periodically, especially after adding new components, to keep the project configuration up-to-date.
+- Build the package:
+  ```bash
+  uv build
+  ```
+
+These utilities are also run as part of the CI/CD pipeline before publishing to PyPI.
 
 ## Coding Style
 
@@ -168,7 +177,7 @@ Please follow these style guidelines:
 - Use [PEP 8](https://www.python.org/dev/peps/pep-0008/) for Python code
 - Add docstrings to all classes and methods
 - Include type hints for all function parameters and return values
-- Format your code with black before submitting
+- Format your code with ruff before submitting
 
 ## Commit Guidelines
 
@@ -179,18 +188,18 @@ Please follow these style guidelines:
 
 Example:
 
-```
-Add Avatar component with size variants
+```text
+Add Button component with color variants
 
-- Implement basic Avatar component
-- Add size variants (sm, md, lg)
-- Include image and initial fallback support
+- Implement basic Button component
+- Add color variants (primary, secondary, success, warning, danger)
+- Include size variants (sm, md, lg)
 - Update examples to showcase the component
 ```
 
 ## Pull Request Process
 
-1. Ensure all code working properly and your code follows the style guidelines
+1. Ensure all code is working properly and your code follows the style guidelines
 2. Update documentation to reflect your changes
 3. Submit a pull request with a clear description of the changes
 4. Address any feedback from code reviews
