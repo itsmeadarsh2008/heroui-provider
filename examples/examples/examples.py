@@ -30,13 +30,11 @@ def index() -> rx.Component:
                     size="lg",
                     src="https://api.dicebear.com/9.x/glass/svg?seed=Kingston",
                 ),
-                rx.flex(
-                    # change dark mode to light mode
-                    hero.button(
-                        rx.icon("eclipse"),
-                        color_scheme="blue",
-                        on_press=rx.toggle_color_mode,
-                    ),
+                hero.alert(
+                    color="success",
+                    title="🐚 Sea of Packages",
+                    description="Don't forget to check out the documentation.",
+                    # variant="solid",
                 ),
                 rx.flex(
                     hero.button(
@@ -53,6 +51,14 @@ def index() -> rx.Component:
                     align="center",
                     margin="auto",
                     gap="1rem",
+                ),
+                hero.switch(
+                    default_selected=False,
+                    on_value_change=rx.toggle_color_mode,
+                    start_content=rx.icon("sun"),
+                    end_content=rx.icon("moon"),
+                    color="success",
+                    size="lg",
                 ),
                 hero.input(
                     placeholder="Type something...",
@@ -76,10 +82,6 @@ def index() -> rx.Component:
                 hero.spinner(
                     size="lg",
                     variant="default",
-                ),
-                hero.switch(
-                    default_selected=True,
-                    on_value_change=State.change_body,  
                 )
             ),
         )
