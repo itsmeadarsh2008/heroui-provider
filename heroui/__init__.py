@@ -11,6 +11,10 @@ from src.checkbox import *
 from src.input import *
 from src.radio import *
 from src.textarea import *
+from src.image import *
+from src.spacer import *
+from src.spinner import *
+from src.switch import *
 
 # Import provider related components
 from src.provider import *

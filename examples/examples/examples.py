@@ -30,13 +30,11 @@ def index() -> rx.Component:
                     size="lg",
                     src="https://api.dicebear.com/9.x/glass/svg?seed=Kingston",
                 ),
-                rx.flex(
-                    # change dark mode to light mode
-                    hero.button(
-                        rx.icon("eclipse"),
-                        color_scheme="blue",
-                        on_press=rx.toggle_color_mode,
-                    ),
+                hero.alert(
+                    color="success",
+                    title="🐚 Sea of Packages",
+                    description="Don't forget to check out the documentation.",
+                    # variant="solid",
                 ),
                 rx.flex(
                     hero.button(
@@ -54,18 +52,37 @@ def index() -> rx.Component:
                     margin="auto",
                     gap="1rem",
                 ),
+                hero.switch(
+                    default_selected=False,
+                    on_value_change=rx.toggle_color_mode,
+                    start_content=rx.icon("sun"),
+                    end_content=rx.icon("moon"),
+                    color="success",
+                    size="lg",
+                ),
                 hero.input(
                     placeholder="Type something...",
                     size="lg",
                     color_scheme="blue",
                     on_value_change=State.set_description,
                 ),
+                hero.spacer(x="2", y="2"),
                 hero.card(
                     hero.card_body(
                         rx.text(State.description),
-                    ),
-                    on_press=State.change_body
+                    )
                 ),
+                hero.image(
+                    src="https://app.requestly.io/delay/5000/https://heroui.com/images/hero-card-complete.jpeg",
+                    height=200,
+                    width=300,
+                    is_blurred=True,
+                    is_zoomed=True,
+                ),
+                hero.spinner(
+                    size="lg",
+                    variant="default",
+                )
             ),
         )
     )
