@@ -1,6 +1,6 @@
 [project]
 name = "heroui-provider"
-version = "0.1.2"
+version = "0.1.3"
 description = "Hero UI - Modern UI components for Reflex Web Framework"
 readme = "README.md"
 authors = [
