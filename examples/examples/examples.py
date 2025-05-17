@@ -60,6 +60,7 @@ def index() -> rx.Component:
                     color_scheme="blue",
                     on_value_change=State.set_description,
                 ),
+                hero.spacer(x="2", y="2"),
                 hero.card(
                     hero.card_body(
                         rx.text(State.description),
@@ -71,6 +72,14 @@ def index() -> rx.Component:
                     width=300,
                     is_blurred=True,
                     is_zoomed=True,
+                ),
+                hero.spinner(
+                    size="lg",
+                    variant="default",
+                ),
+                hero.switch(
+                    default_selected=True,
+                    on_value_change=State.change_body,  
                 )
             ),
         )
