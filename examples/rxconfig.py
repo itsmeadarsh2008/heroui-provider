@@ -15,6 +15,7 @@ HeroUILinker: str = "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}"
 
 config = rx.Config(
     app_name="examples",
+    plugins=[],
     tailwind={
         "theme": {"extend": {}},
         "content": [HeroUILinker],
