@@ -79,6 +79,8 @@ def index() -> rx.Component:
                     is_blurred=True,
                     is_zoomed=True,
                 ),
+                hero.chip("v1.0.0 has been released!", variant="faded", color="success"),
+                hero.code("uv pip install heroui-provider"),
                 hero.spinner(
                     size="lg",
                     variant="default",
