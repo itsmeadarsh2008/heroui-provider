@@ -20,15 +20,19 @@ class State(rx.State):
     def change_body(self, value: str):
         self.description = "It is animated by default. Wrapper over @heroui"
 
+
 def index() -> rx.Component:
     return rx.container(
         hero.provider(
             # hero.theme(),
             rx.vstack(
-                hero.avatar(
-                    name="John Doe",
-                    size="lg",
-                    src="https://api.dicebear.com/9.x/glass/svg?seed=Kingston",
+                hero.badge(
+                    hero.avatar(
+                        name="John Doe",
+                        size="lg",
+                        src="https://api.dicebear.com/9.x/glass/svg?seed=Kingston",
+                    ),
+                    content="1",
                 ),
                 hero.alert(
                     color="success",
@@ -37,17 +41,9 @@ def index() -> rx.Component:
                     # variant="solid",
                 ),
                 rx.flex(
-                    hero.button(
-                        "Increment",
-                        on_press=State.increment,
-                        color="success"
-                    ),
+                    hero.button("Increment", on_press=State.increment, color="success"),
                     rx.text(State.count),
-                    hero.button(
-                        "Decrement",
-                        on_press=State.decrement,
-                        color="danger"
-                    ),
+                    hero.button("Decrement", on_press=State.decrement, color="danger"),
                     align="center",
                     margin="auto",
                     gap="1rem",
@@ -79,12 +75,14 @@ def index() -> rx.Component:
                     is_blurred=True,
                     is_zoomed=True,
                 ),
-                hero.chip("v1.0.0 has been released!", variant="faded", color="success"),
+                hero.chip(
+                    "v1.0.0 has been released!", variant="faded", color="success"
+                ),
                 hero.code("uv pip install heroui-provider"),
                 hero.spinner(
                     size="lg",
                     variant="default",
-                )
+                ),
             ),
         )
     )
