@@ -18,6 +18,7 @@ from src.switch import *
 from src.chip import *
 from src.code import *
 from src.badge import *
+from src.snippet import *
 
 # Import provider related components
 from src.provider import *

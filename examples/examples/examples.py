@@ -34,6 +34,9 @@ def index() -> rx.Component:
                     ),
                     content="1",
                 ),
+                hero.snippet(
+                    rx.el.span("echo 'Hello, World!'"),
+                ),
                 hero.alert(
                     color="success",
                     title="🐚 Sea of Packages",
